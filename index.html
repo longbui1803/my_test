@@ -1,33 +1,117 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Trang Web Đơn Giản</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xin Lỗi Em</title>
   <style>
     body {
       font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #ffe6e6;
+      overflow: hidden;
+      position: relative;
       text-align: center;
-      padding: 20px;
+      transition: background 1s ease-in-out;
     }
+
     h1 {
-      color: #2c3e50;
+      color: #ff4d4d;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
     }
+
+    p {
+      font-size: 1.2rem;
+      color: #333;
+      margin-bottom: 2rem;
+    }
+
     button {
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #3498db;
-      color: white;
+      padding: 15px 30px;
+      font-size: 1rem;
       border: none;
-      border-radius: 5px;
+      border-radius: 25px;
+      background-color: #ff4d4d;
+      color: white;
       cursor: pointer;
+      transition: background-color 0.3s;
     }
+
     button:hover {
-      background-color: #2980b9;
+      background-color: #cc0000;
+    }
+
+    #message {
+      display: none;
+      font-size: 1.5rem;
+      color: #28a745;
+      margin-top: 1rem;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .heart {
+      position: fixed;
+      font-size: 24px;
+      color: #ff4d4d;
+      animation: floatUp 4s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) scale(0.5);
+        opacity: 0;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Chào mừng bạn đến với trang web của tôi!</h1>
-  <p>Đây là một trang web đơn giản để đẩy lên GitHub.</p>
-  <button onclick="alert('Cảm ơn bạn đã ghé thăm!')">Nhấn vào tôi</button>
+
+  <h1>Xin lỗi em ❤️</h1>
+  <p>Anh biết anh đã sai. Hãy tha thứ cho anh nhé!</p>
+  <button onclick="showMessage()">Tha thứ cho anh</button>
+  <p id="message">Cảm ơn em nhiều lắm! Anh yêu em! ❤️</p>
+
+  <script>
+    function showMessage() {
+      document.getElementById('message').style.display = 'block';
+      document.body.style.background = "url('background.jpg') no-repeat center center";
+      document.body.style.backgroundSize = "cover";
+      createHearts();
+    }
+
+    function createHearts() {
+      const numHearts = 20;
+      for (let i = 0; i < numHearts; i++) {
+        setTimeout(() => {
+          const heart = document.createElement('div');
+          heart.classList.add('heart');
+          heart.innerHTML = '❤️';
+          heart.style.left = `${Math.random() * 100}vw`;
+          heart.style.animationDuration = `${2 + Math.random() * 3}s`;
+          document.body.appendChild(heart);
+
+          setTimeout(() => {
+            heart.remove();
+          }, 4000);
+        }, i * 200);
+      }
+    }
+  </script>
+
 </body>
 </html>
